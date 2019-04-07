@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { Auth } from './components/auth'
+import { BrowserRouter } from 'react-router-dom'
+import AppLayout from './layout'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Auth />
-      </div>
+      <BrowserRouter>
+        <AppLayout />
+      </BrowserRouter>
     )
   }
 }

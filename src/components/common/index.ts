@@ -1,1 +1,1 @@
-export { default as CustomInput, ICustomInput } from './custom-input'
+export { default as CustomInput } from './custom-input'

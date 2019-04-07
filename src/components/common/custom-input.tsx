@@ -25,7 +25,6 @@ const CustomInput: React.FC<ICustomInput> = ({
         name={name}
         type={type}
         id={name}
-        autoComplete={name}
       />
     </FormControl>
   )
