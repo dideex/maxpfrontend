@@ -1,18 +1,12 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
-import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Theme, createStyles } from '@material-ui/core'
+
+import AuthHeader from "./auth-header";
+import { CustomInput } from '../common'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -48,7 +42,7 @@ const styles = (theme: Theme) =>
     }
   })
 
-interface ISignInClassnames {
+interface ISignInTheme {
   main: string
   paper: string
   avatar: string
@@ -57,40 +51,42 @@ interface ISignInClassnames {
 }
 
 interface ISignIn {
-  classes: ISignInClassnames
+  classes: ISignInTheme
+}
+
+interface IForm {
+  [key: string]: string
 }
 
 const SignIn: React.FC<ISignIn> = ({ classes }) => {
   const { main, paper, avatar, form, submit } = classes
 
+  const [state, setState] = React.useState<IForm>({})
+
+  const getInputProps = (name: string) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+      setState({ ...state, [name]: event.target.value })
+    return {
+      value: state[name],
+      handleChange,
+      name
+    }
+  }
+
+
+const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
+  e.preventDefault()
+  console.log(" LOG ___ state ", state )
+}
+
   return (
     <main className={main}>
       <CssBaseline />
       <Paper className={paper}>
-        <Avatar className={avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={form}>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input
-              name="password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-          </FormControl>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+        <AuthHeader theme={avatar} title="Sign in"  />
+        <form className={form} onSubmit={handleSubmit}>
+          <CustomInput {...getInputProps('username')} type="text" />
+          <CustomInput {...getInputProps('password')} type="password" />
           <Button
             type="submit"
             fullWidth
