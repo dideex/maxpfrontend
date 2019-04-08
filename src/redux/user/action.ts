@@ -1,4 +1,15 @@
-import { createActions } from 'redux-actions'
+import { IUserRequest, AUTH_USER_REQUEST, TUserAuthAction } from './types'
+
+export function authUserRequest(values: IUserRequest): TUserAuthAction {
+  return {
+    type: AUTH_USER_REQUEST,
+    payload: values
+  }
+}
+
+export default { authUserRequest }
+
+/* import { createActions } from 'redux-actions'
 
 export const { user } = createActions({
   USER: {
@@ -12,3 +23,4 @@ export const { user } = createActions({
     }
   }
 })
+ */
