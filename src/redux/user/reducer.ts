@@ -1,8 +1,9 @@
 import {
-  TUserAuthAction,
+  TUserAction,
   AUTH_USER_REQUEST,
   AUTH_USER_SUCCESS,
-  IUser
+  IUser,
+  AUTH_USER_ERROR
 } from './types'
 
 const initialState: IUser = {
@@ -15,10 +16,7 @@ const initialState: IUser = {
   loading: 'IDLE'
 }
 
-export function userReducer(
-  state = initialState,
-  action: TUserAuthAction
-): IUser {
+export function userReducer(state = initialState, action: TUserAction): IUser {
   const { type, payload } = action
   switch (type) {
     case AUTH_USER_REQUEST: {
@@ -30,7 +28,14 @@ export function userReducer(
     case AUTH_USER_SUCCESS: {
       return {
         ...state,
-        loading: '',
+        ...payload,
+        loading: 'LOADED'
+      }
+    }
+    case AUTH_USER_ERROR: {
+      return {
+        ...state,
+        loading: 'ERROR'
       }
     }
     default:

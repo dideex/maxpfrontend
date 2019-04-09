@@ -1,6 +1,6 @@
-import { IUserRequest, AUTH_USER_REQUEST, TUserAuthAction } from './types'
+import { IUserRequest, AUTH_USER_REQUEST, TUserAction } from './types'
 
-export function authUserRequest(values: IUserRequest): TUserAuthAction {
+export function authUserRequest(values: IUserRequest): TUserAction {
   return {
     type: AUTH_USER_REQUEST,
     payload: values
