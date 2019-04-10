@@ -5,7 +5,7 @@ export interface INews {
   date: string
 }
 
-import { IUser } from '../redux/user/types'
+import { IUser } from './user/types'
 
 const user: IUser = {
   loggedIn: false,

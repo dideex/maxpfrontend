@@ -43,4 +43,4 @@ export function userReducer(state = initialState, action: TUserAction): IUser {
   }
 }
 
-export default { userReducer }
+export default userReducer
