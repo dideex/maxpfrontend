@@ -1,4 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
+import { SagaIterator } from '@redux-saga/core';
+
 import {
   AUTH_USER_REQUEST,
   AUTH_USER_SUCCESS,
@@ -8,8 +10,8 @@ import {
 } from './types'
 import { authUserSuccess } from './action'
 
-function* rootSaga() {
-  yield takeEvery<TUserAction>(AUTH_USER_REQUEST, authUser)
+function* rootSaga(): SagaIterator {
+  yield takeEvery<{}>(AUTH_USER_REQUEST, authUser)
 }
 
 function* authUser(user: IUserRequest) {
@@ -24,3 +26,5 @@ function* authUser(user: IUserRequest) {
   }
   yield put(authUserSuccess(userInfo))
 }
+
+export default rootSaga
