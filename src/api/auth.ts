@@ -45,3 +45,5 @@ export const checkAuthStatus = (): boolean => {
 export const logout = (): void => {
   window.localStorage.removeItem(config.tokenKey)
 }
+
+export const loadInitialData = () => {}
