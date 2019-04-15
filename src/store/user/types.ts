@@ -19,20 +19,20 @@ export const AUTH_USER_REQUEST = 'AUTH_USER_REQUEST'
 export const AUTH_USER_SUCCESS = 'AUTH_USER_SUCCESS'
 export const AUTH_USER_ERROR = 'AUTH_USER_ERROR'
 
-interface UsetAuthActionRequest {
+export interface UserAuthActionRequest {
   type: typeof AUTH_USER_REQUEST
   payload: IUserRequest
 }
-interface UsetAuthActionSuccess {
+export interface UserAuthActionSuccess {
   type: typeof AUTH_USER_SUCCESS
   payload: IUser
 }
-interface UsetAuthActionError {
+export interface UserAuthActionError {
   type: typeof AUTH_USER_ERROR
   payload: never
 }
 
 export type TUserAction =
-  | UsetAuthActionRequest
-  | UsetAuthActionSuccess
-  | UsetAuthActionError
+  | UserAuthActionRequest
+  | UserAuthActionSuccess
+  | UserAuthActionError
