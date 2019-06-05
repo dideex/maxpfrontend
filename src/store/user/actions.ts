@@ -1,38 +1,21 @@
 import {
   IUserRequest,
-  AUTH_USER_REQUEST,
-  TUserAction,
   IUser,
+  AUTH_USER_REQUEST,
   AUTH_USER_SUCCESS
 } from './types'
 
-export function authUserRequest(values: IUserRequest): TUserAction {
+export function authUserRequest(values: IUserRequest) {
   return {
     type: AUTH_USER_REQUEST,
     payload: values
-  }
+  } as const
 }
-export function authUserSuccess(user: IUser): TUserAction {
+export function authUserSuccess(user: IUser) {
   return {
     type: AUTH_USER_SUCCESS,
     payload: user
-  }
+  } as const
 }
 
-export default { authUserRequest, authUserSuccess }
-
-/* import { createActions } from 'redux-actions'
-
-export const { user } = createActions({
-  USER: {
-    REQUEST: {
-      AUTH: (username, password) => ({ username, password }),
-      DATA: payload => payload
-    },
-    SUCCESS: {
-      AUTH: payload => payload,
-      DATA: payload => payload
-    }
-  }
-})
- */
+// export default { authUserRequest, authUserSuccess }

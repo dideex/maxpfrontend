@@ -1,4 +1,4 @@
-import { call, put, takeEvery, all, takeLatest } from 'redux-saga/effects'
+import { call, put, all, takeLatest } from 'redux-saga/effects'
 import { SagaIterator } from '@redux-saga/core'
 
 import API from '../../api'
