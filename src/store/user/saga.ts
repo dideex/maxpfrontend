@@ -3,22 +3,18 @@ import { SagaIterator } from '@redux-saga/core'
 
 import API from '../../api'
 
-import {
-  AUTH_USER_REQUEST,
-  IUser,
-  UserAuthActionRequest
-} from './types'
-import { authUserSuccess } from './actions'
+import { AUTH_USER_REQUEST, IUser, ActionTypes } from './types'
+import { authUserSuccess, authUserRequest } from './actions'
 
 function* rootSaga() {
   yield all([userSaga()])
 }
 
 function* userSaga(): SagaIterator {
-  yield takeLatest<UserAuthActionRequest>(AUTH_USER_REQUEST, authUser)
+  yield takeLatest<ActionTypes>(AUTH_USER_REQUEST, authUser)
 }
 
-function* authUser(data: UserAuthActionRequest): SagaIterator {
+function* authUser(data: ActionTypes): SagaIterator {
   const { payload } = data
   const userInfo: IUser = yield call(API.authenticate, payload)
   yield put(authUserSuccess(userInfo))
