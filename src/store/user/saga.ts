@@ -16,8 +16,8 @@ function* userSaga(): SagaIterator {
 
 function* authUser(data: ActionTypes): SagaIterator {
   const { payload } = data
-  const userInfo: IUser = yield call(API.authenticate, payload)
-  yield put(authUserSuccess(userInfo))
+  // const userInfo: IUser = yield call(API.authenticate, payload)
+  // yield put(authUserSuccess(userInfo))
 }
 
 export default rootSaga

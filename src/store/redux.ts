@@ -34,8 +34,9 @@ const initialState: RootStore = {
 
 type InitAction = Action<'init'>
 type ResetAction = Action<'reset'>
+type IncAction = Action<'inc'>
 
-type Actions = InitAction | ResetAction
+type Actions = InitAction | ResetAction | IncAction
 
 export const init = (): InitAction => ({
   type: 'init',
@@ -43,6 +44,10 @@ export const init = (): InitAction => ({
 
 export const reset = (): ResetAction => ({
   type: 'reset',
+})
+
+export const inc = (): IncAction => ({
+  type: 'inc',
 })
 
 export const thunkAction = (
@@ -64,9 +69,16 @@ const reducer = (state = initialState, action: Actions) => {
         b: 'updated',
         c: true,
       }
+
     case 'reset':
       return {
         ...initialState,
+      }
+
+    case 'inc':
+      return {
+        ...state,
+        a: state.a + 1,
       }
 
     default:

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import {
   RootStore,
   init,
+  inc,
   TypeOfConnect,
   thunkAction,
   unboxThunk,
@@ -15,6 +16,7 @@ const storeEnhancer = connect(
   }),
   {
     init,
+    inc,
     thunkAction: unboxThunk(thunkAction),
   },
   null,
@@ -34,6 +36,7 @@ class App extends React.PureComponent<AppProps> {
         <div>{this.props.a}</div>
         <div>{this.props.b}</div>
         <div>{String(this.props.c)}</div>
+        <button onClick={this.props.inc}>Inc</button>
       </>
     )
   }
