@@ -3,7 +3,7 @@ import { BrowserRouter as RouterProvider } from 'react-router-dom'
 import { Provider as ReduxProvider } from 'react-redux'
 
 // import AppLayout from './layout'
-import ReduxApp from './store/redux-app'
+import ReduxApp from './store/redux/app'
 import { store } from './store/redux'
 
 class App extends Component {

@@ -3,6 +3,8 @@ import thunk, { ThunkAction } from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import { InferableComponentEnhancerWithProps } from 'react-redux'
 
+import * as actions from './actions'
+
 export type TypeOfConnect<T> = T extends InferableComponentEnhancerWithProps<
   infer Props,
   infer _
@@ -32,35 +34,18 @@ const initialState: RootStore = {
   c: false,
 }
 
-type InitAction = Action<'init'>
-type ResetAction = Action<'reset'>
-type IncAction = Action<'inc'>
-
-type Actions = InitAction | ResetAction | IncAction
-
-export const init = (): InitAction => ({
-  type: 'init',
-})
-
-export const reset = (): ResetAction => ({
-  type: 'reset',
-})
-
-export const inc = (): IncAction => ({
-  type: 'inc',
-})
+type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never
+export type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
 export const thunkAction = (
   delay: number,
 ): ThunkAction<void, RootStore, void, AnyAction> => dispatch => {
-  console.log('waiting for', delay)
   setTimeout(() => {
-    console.log('reset')
-    dispatch(reset())
+    dispatch(actions.reset())
   }, delay)
 }
 
-const reducer = (state = initialState, action: Actions) => {
+const reducer = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
     case 'init':
       return {

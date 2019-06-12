@@ -1,14 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import {
-  RootStore,
-  init,
-  inc,
-  TypeOfConnect,
-  thunkAction,
-  unboxThunk,
-} from './redux'
+import { RootStore, TypeOfConnect, thunkAction, unboxThunk } from './index'
+
+import { init, inc } from './actions'
 
 const storeEnhancer = connect(
   (state: RootStore) => ({
