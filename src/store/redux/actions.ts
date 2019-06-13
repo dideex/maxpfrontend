@@ -1,18 +1,23 @@
-import { Action } from 'redux'
+import { Action, AnyAction } from 'redux'
+
+function inferLiteralFromString<T extends string>(arg: T): T {
+  return arg
+}
 
 type InitAction = Action<'init'>
 type ResetAction = Action<'reset'>
-type IncAction = Action<'inc'>
+type IncAction = AnyAction
 
-export const init = (): InitAction => ({
-  type: 'init',
+export const init = () => ({
+  type: inferLiteralFromString('init'),
 })
 
-export const reset = (): ResetAction => ({
-  type: 'reset',
+export const reset = () => ({
+  type: inferLiteralFromString('reset'),
 })
 
-export const inc = (): IncAction => ({
-  type: 'inc',
-  // payload: { val },
-})
+export const inc = (val: number) =>
+  ({
+    type: inferLiteralFromString('inc'),
+    payload: { val },
+  })

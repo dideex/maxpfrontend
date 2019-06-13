@@ -63,7 +63,7 @@ const reducer = (state = initialState, action: ActionTypes) => {
     case 'inc':
       return {
         ...state,
-        a: state.a + 1,
+        a: action.payload.val,
       }
 
     default:

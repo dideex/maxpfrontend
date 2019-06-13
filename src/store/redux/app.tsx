@@ -25,13 +25,17 @@ class App extends React.PureComponent<AppProps> {
     this.props.init()
     this.props.thunkAction(3000)
   }
+  _handleClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    this.props.inc(Number(this.props.a) + 1)
+  }
   render() {
     return (
       <>
         <div>{this.props.a}</div>
         <div>{this.props.b}</div>
         <div>{String(this.props.c)}</div>
-        <button onClick={this.props.inc}>Inc</button>
+        <button onClick={this._handleClick}>Inc</button>
       </>
     )
   }
