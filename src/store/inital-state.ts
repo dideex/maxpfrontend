@@ -17,7 +17,7 @@ const user: IUser = {
   loading: 'IDLE'
 }
 
-const news: INews[] | [] = []
+const news: INews[] = []
 
 const initalStore = { user, news }
 export default initalStore

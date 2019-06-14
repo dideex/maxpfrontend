@@ -4,10 +4,6 @@ function inferLiteralFromString<T extends string>(arg: T): T {
   return arg
 }
 
-type InitAction = Action<'init'>
-type ResetAction = Action<'reset'>
-type IncAction = AnyAction
-
 export const init = () => ({
   type: inferLiteralFromString('init'),
 })
