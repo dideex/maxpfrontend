@@ -2,6 +2,7 @@ import { createStore, Action, applyMiddleware, AnyAction } from 'redux'
 import thunk, { ThunkAction } from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import { InferableComponentEnhancerWithProps } from 'react-redux'
+import * as constants from "../../constants";
 
 import * as actions from './actions'
 
@@ -47,7 +48,7 @@ export const thunkAction = (
 
 const reducer = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
-    case 'init':
+    case constants.init:
       return {
         ...state,
         a: state.a + 1,
@@ -55,7 +56,7 @@ const reducer = (state = initialState, action: ActionTypes) => {
         c: true,
       }
 
-    case 'reset':
+    case constants.reset:
       return {
         ...initialState,
       }
