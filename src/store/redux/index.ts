@@ -35,9 +35,6 @@ const initialState: RootStore = {
   c: false,
 }
 
-type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never
-export type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
-
 export const thunkAction = (
   delay: number,
 ): ThunkAction<void, RootStore, void, AnyAction> => dispatch => {
@@ -45,6 +42,10 @@ export const thunkAction = (
     dispatch(actions.reset())
   }, delay)
 }
+
+type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never
+export type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
+
 
 const reducer = (state = initialState, action: ActionTypes) => {
   switch (action.type) {

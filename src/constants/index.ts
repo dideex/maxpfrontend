@@ -1,7 +1,7 @@
 const appName = 'maxp'
 const moduleName = 'redex'
 
-export const init = `${appName}/${moduleName}/INIT`
+export const init: string = `${appName}/${moduleName}/INIT`
 export const reset = `${appName}/${moduleName}/RESET`
 export const inc = `${appName}/${moduleName}/INC`
 

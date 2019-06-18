@@ -5,8 +5,12 @@ function inferLiteralFromString<T extends string>(arg: T): T {
   return arg
 }
 
-export const init = () => ({
-  type: inferLiteralFromString('init'),
+interface IInit {
+    type: typeof constants.init
+    payload?: any
+  }
+export const init = (): IInit => ({
+  type: constants.init,
 })
 
 export const reset = () => ({
