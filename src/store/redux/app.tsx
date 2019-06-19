@@ -1,7 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { RootStore, TypeOfConnect, thunkAction, unboxThunk } from './index'
+import {
+  RootStore,
+  TypeOfConnect,
+  thunkAction,
+  unboxThunk,
+  authUser,
+} from './index'
 
 import { init, inc } from './actions'
 
@@ -13,6 +19,7 @@ const storeEnhancer = connect(
     init,
     inc,
     thunkAction: unboxThunk(thunkAction),
+    authUser: unboxThunk(authUser),
   },
   null,
   { pure: false },
@@ -24,6 +31,7 @@ class App extends React.PureComponent<AppProps> {
   componentDidMount() {
     this.props.init()
     this.props.thunkAction(3000)
+    this.props.authUser({ username: 'Admin', password: '12345' })
   }
   _handleClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {
     event.preventDefault()

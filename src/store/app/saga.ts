@@ -8,7 +8,7 @@ import {
   loadInitialDataSuccess
 } from './actions'
 
-import API from '../../api'
+import * as API from '../../api'
 
 export function* loadInitialData() {
   try {

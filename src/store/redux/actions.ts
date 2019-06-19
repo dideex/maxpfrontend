@@ -9,25 +9,26 @@ interface IInit {
     type: typeof constants.init
     payload?: any
   }
-export const init = (): IInit => ({
-  type: constants.init,
-})
+
+export const init = () => ({
+  type: 'init',
+} as const)
 
 export const reset = () => ({
-  type: inferLiteralFromString('reset'),
-})
+  type: 'reset',
+} as const)
 
 export const inc = (val: number) => ({
-  type: inferLiteralFromString('inc'),
+  type: 'inc',
   payload: { val },
-})
+} as const)
 
 export const getUserDataSuccess = (user: IUser) => ({
-  type: inferLiteralFromString('getUserDataSuccess'),
+  type: 'getUserDataSuccess',
   payload: { user },
-})
+} as const)
 
 export const getUserDataFail = (err: IUserError) => ({
-  type: inferLiteralFromString('getUserDataFail'),
+  type: 'getUserDataFail',
   payload: { err },
-})
+} as const)

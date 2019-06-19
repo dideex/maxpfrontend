@@ -2,9 +2,12 @@ import { createStore, Action, applyMiddleware, AnyAction } from 'redux'
 import thunk, { ThunkAction } from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import { InferableComponentEnhancerWithProps } from 'react-redux'
-import * as constants from "../../constants";
+// import {  } from '../../api'
+import * as constants from '../../constants'
 
 import * as actions from './actions'
+import { authenticate } from '../../api'
+import { IUserRequest } from '../user/types'
 
 export type TypeOfConnect<T> = T extends InferableComponentEnhancerWithProps<
   infer Props,
@@ -43,13 +46,19 @@ export const thunkAction = (
   }, delay)
 }
 
+export const authUser = (
+  data: IUserRequest,
+): ThunkAction<void, RootStore, void, AnyAction> => dispatch => {
+  console.log('fire thunk')
+  authenticate(data).then(response => console.log(response))
+}
+
 type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never
 export type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
-
 const reducer = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
-    case constants.init:
+    case 'init':
       return {
         ...state,
         a: state.a + 1,
@@ -57,7 +66,7 @@ const reducer = (state = initialState, action: ActionTypes) => {
         c: true,
       }
 
-    case constants.reset:
+    case 'reset':
       return {
         ...initialState,
       }

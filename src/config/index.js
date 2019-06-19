@@ -1,4 +1,4 @@
-import ci from 'ci.json'
+import ci from './ci.json'
 import dev from './dev.json'
 import production from './prod.json'
 import test from './test.json'

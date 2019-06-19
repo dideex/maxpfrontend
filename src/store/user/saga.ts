@@ -1,7 +1,7 @@
 import { call, put, all, takeLatest } from 'redux-saga/effects'
 import { SagaIterator } from '@redux-saga/core'
 
-import API from '../../api'
+import * as API from '../../api'
 
 import { AUTH_USER_REQUEST, IUser, ActionTypes } from './types'
 import { authUserSuccess, authUserRequest } from './actions'
