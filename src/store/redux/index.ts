@@ -6,7 +6,7 @@ import { InferableComponentEnhancerWithProps } from 'react-redux'
 import * as constants from '../../constants'
 
 import * as actions from './actions'
-import { authenticate } from '../../api'
+import { authenticate, IAuthResponse } from '../../api'
 import { IUserRequest } from '../user/types'
 
 export type TypeOfConnect<T> = T extends InferableComponentEnhancerWithProps<
@@ -49,15 +49,19 @@ export const thunkAction = (
 export const authUser = (
   data: IUserRequest,
 ): ThunkAction<void, RootStore, void, AnyAction> => dispatch => {
-  authenticate(data).then(response => {
-    console.log(response)
-    if (response.data) {
-      console.log('fire thunk', data)
-      dispatch(actions.getUserDataSuccess(response.data))
-    } else if (response.errorText) {
-      dispatch(actions.getUserDataFail(response.errorText))
-    }
-  })
+  authenticate(data)
+    .then(response => {
+      console.log(response)
+      if (response.data) {
+        dispatch(actions.getUserDataSuccess(response.data))
+      }
+    })
+    .catch(err => {
+      if (err.errorText) {
+        console.log('TCL: err', err)
+        dispatch(actions.getUserDataFail(err))
+      }
+    })
 }
 
 type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never
@@ -88,7 +92,14 @@ const reducer = (state = initialState, action: ActionTypes) => {
       return {
         ...state,
         a: action.payload.user.age,
-        b: action.payload.user.email
+        b: action.payload.user.email,
+      }
+
+    case 'getUserDataFail':
+      return {
+        ...state,
+        a: action.payload.err.status,
+        b: action.payload.err.errorText,
       }
 
     default:
