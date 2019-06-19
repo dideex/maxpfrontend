@@ -49,8 +49,15 @@ export const thunkAction = (
 export const authUser = (
   data: IUserRequest,
 ): ThunkAction<void, RootStore, void, AnyAction> => dispatch => {
-  console.log('fire thunk')
-  authenticate(data).then(response => console.log(response))
+  authenticate(data).then(response => {
+    console.log(response)
+    if (response.data) {
+      console.log('fire thunk', data)
+      dispatch(actions.getUserDataSuccess(response.data))
+    } else if (response.errorText) {
+      dispatch(actions.getUserDataFail(response.errorText))
+    }
+  })
 }
 
 type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never
@@ -75,6 +82,13 @@ const reducer = (state = initialState, action: ActionTypes) => {
       return {
         ...state,
         a: action.payload.val,
+      }
+
+    case 'getUserDataSuccess':
+      return {
+        ...state,
+        a: action.payload.user.age,
+        b: action.payload.user.email
       }
 
     default:

@@ -10,7 +10,7 @@ export interface IUser {
   avatar: string
   age: number
   email: string
-  gender: 'man' | 'woman' | null
+  gender: 'man' | 'woman'
   loading: TLoading
 }
 

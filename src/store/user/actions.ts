@@ -5,6 +5,7 @@ import {
   AUTH_USER_SUCCESS,
   AUTH_USER_ERROR,
 } from './types'
+import { IUserError } from '../redux/types';
 
 export function authUserRequest(values: IUserRequest) {
   return {
@@ -20,7 +21,7 @@ export function authUserSuccess(user: IUser) {
   } as const
 }
 
-export function authUserError(user: IUser) {
+export function authUserError(user: IUserError) {
   return {
     type: AUTH_USER_ERROR,
     payload: user,

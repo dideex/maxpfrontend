@@ -17,7 +17,10 @@ interface IAuthResponse {
 }
 
 const checkCredentials = (data: IUserRequest): boolean => {
-  if (data.username === 'Admin' && data.password === '12345') {
+  if (
+    data.username.toLowerCase() === 'admin' &&
+    data.password.toLowerCase() === '12345'
+  ) {
     return true
   } else {
     return false
@@ -29,7 +32,7 @@ export const authenticate = (data: IUserRequest): Promise<IAuthResponse> => {
     if (!checkCredentials(data)) {
       reject({
         status: 500,
-        errorText: incorrect_login_or_password
+        errorText: incorrect_login_or_password,
       })
     }
     window.localStorage.setItem(config.tokenKey, 'true')
@@ -42,8 +45,8 @@ export const authenticate = (data: IUserRequest): Promise<IAuthResponse> => {
         age: 23,
         email: 'myemail@mail.com',
         gender: 'man',
-        loading: 'LOADED'
-      }
+        loading: 'LOADED',
+      },
     })
   })
 

@@ -12,7 +12,7 @@ const initialState: IUser = {
   avatar: '',
   age: 0,
   email: '',
-  gender: null,
+  gender: 'man',
   loading: 'IDLE',
 }
 

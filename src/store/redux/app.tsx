@@ -26,16 +26,28 @@ const storeEnhancer = connect(
 )
 
 type AppProps = {} & TypeOfConnect<typeof storeEnhancer>
+type AppState = { username: string; password: string }
 
-class App extends React.PureComponent<AppProps> {
+class App extends React.PureComponent<AppProps, AppState> {
+  state = {
+    username: '',
+    password: '',
+  }
   componentDidMount() {
     this.props.init()
     this.props.thunkAction(3000)
-    this.props.authUser({ username: 'Admin', password: '12345' })
   }
   _handleClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {
     event.preventDefault()
     this.props.inc(Number(this.props.a) + 1)
+  }
+  _handleAuth = () => {
+    this.props.authUser({ ...this.state })
+  }
+  _handleChange = (name: string) => (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    this.setState({ ...this.state, [name]: event.target.value })
   }
   render() {
     return (
@@ -43,6 +55,17 @@ class App extends React.PureComponent<AppProps> {
         <div>{this.props.a}</div>
         <div>{this.props.b}</div>
         <div>{String(this.props.c)}</div>
+        <input
+          type="text"
+          value={this.state.username}
+          onChange={this._handleChange('username')}
+        />
+        <input
+          type="text"
+          value={this.state.password}
+          onChange={this._handleChange('password')}
+        />
+        <button onClick={this._handleAuth}>Login</button>
         <button onClick={this._handleClick}>Inc</button>
       </>
     )
