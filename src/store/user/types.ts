@@ -1,18 +1,7 @@
-import { TLoading } from '../../types'
 import * as actions from './actions'
 
 type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never
 export type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
-
-export interface IUser {
-  loggedIn: boolean
-  userName: string
-  avatar: string
-  age: number
-  email: string
-  gender: 'man' | 'woman'
-  loading: TLoading
-}
 
 export interface IUserRequest {
   username: string

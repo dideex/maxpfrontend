@@ -3,8 +3,8 @@ import { SagaIterator } from '@redux-saga/core'
 
 import * as API from '../../api'
 
-import { AUTH_USER_REQUEST, IUser, ActionTypes } from './types'
-import { authUserSuccess, authUserRequest } from './actions'
+import { AUTH_USER_REQUEST, ActionTypes } from './types'
+// import { authUserSuccess, authUserRequest } from './actions'
 
 function* rootSaga() {
   yield all([userSaga()])

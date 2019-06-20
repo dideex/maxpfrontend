@@ -2,11 +2,9 @@ import { createStore, Action, applyMiddleware, AnyAction } from 'redux'
 import thunk, { ThunkAction } from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import { InferableComponentEnhancerWithProps } from 'react-redux'
-// import {  } from '../../api'
-import * as constants from '../../constants'
 
 import * as actions from './actions'
-import { authenticate, IAuthResponse } from '../../api'
+import { authenticate } from '../../api'
 import { IUserRequest } from '../user/types'
 
 export type TypeOfConnect<T> = T extends InferableComponentEnhancerWithProps<

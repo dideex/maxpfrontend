@@ -1,6 +1,7 @@
 // import { IUserRequest } from '../models/user'
-import { IUserRequest, IUser } from '../store/user/types'
+import { IUserRequest } from '../store/user/types'
 import config from '../config'
+import { IUser } from '../store/redux/types'
 
 const incorrect_login_or_password = 'incorrect_login_or_password'
 
@@ -41,16 +42,14 @@ export const authenticate = (data: IUserRequest): Promise<IAuthResponse> => {
       resolve({
         status: 200,
         data: {
-          loggedIn: true,
           userName: 'Admin',
           avatar: 'avatar.jpg',
           age: 23,
           email: 'myemail@mail.com',
           gender: 'man',
-          loading: 'LOADED',
         },
       })
-    }, 300)
+    }, 3000)
   })
 
   return promise

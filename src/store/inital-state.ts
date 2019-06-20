@@ -5,16 +5,14 @@ export interface INews {
   date: string
 }
 
-import { IUser } from './user/types'
+import { IUser } from './redux/types'
 
 const user: IUser = {
-  loggedIn: false,
   userName: '',
   avatar: '',
   age: 0,
   email: '',
   gender: 'man',
-  loading: 'IDLE'
 }
 
 const news: INews[] = []
