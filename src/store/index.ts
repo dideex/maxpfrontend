@@ -3,9 +3,11 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 
-import { reducers as userReducer } from './user'
+import { reducer as userReducer, initialState as userInitialState } from './redux'
 
-import initialState from './inital-state'
+const initialState = {
+  user: userInitialState
+}
 
 const reducer = combineReducers({
   user: userReducer

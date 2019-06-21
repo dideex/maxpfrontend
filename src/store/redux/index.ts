@@ -4,8 +4,7 @@ import { createLogger } from 'redux-logger'
 import { InferableComponentEnhancerWithProps } from 'react-redux'
 
 import * as actions from './actions'
-import { authenticate } from '../../api'
-import { IUserRequest } from '../user/types'
+import { authenticate, IUserRequest } from '../../api'
 
 export type TypeOfConnect<T> = T extends InferableComponentEnhancerWithProps<
   infer Props,
@@ -30,7 +29,7 @@ export type RootStore = {
   c: boolean
 }
 
-const initialState: RootStore = {
+export const initialState: RootStore = {
   a: 0,
   b: 'initial',
   c: false,
@@ -65,7 +64,7 @@ export const authUser = (
 type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never
 export type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
-const reducer = (state = initialState, action: ActionTypes) => {
+export const reducer = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
     case 'init':
       return {

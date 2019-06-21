@@ -1,9 +1,12 @@
-// import { IUserRequest } from '../models/user'
-import { IUserRequest } from '../store/user/types'
 import config from '../config'
 import { IUser } from '../store/redux/types'
 
 const incorrect_login_or_password = 'incorrect_login_or_password'
+
+export interface IUserRequest {
+  username: string
+  password: string
+}
 
 interface IResponseErrorLogOrPwd {
   errorText: typeof incorrect_login_or_password
