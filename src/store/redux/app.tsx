@@ -35,7 +35,6 @@ class App extends React.PureComponent<AppProps, AppState> {
   }
   componentDidMount() {
     this.props.init()
-    this.props.thunkAction(3000)
   }
   _handleClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {
     event.preventDefault()

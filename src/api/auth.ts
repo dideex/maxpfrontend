@@ -1,25 +1,6 @@
 import config from '../config'
-import { IUser } from '../store/redux/types'
+import { incorrect_login_or_password, IUserRequest, IAuthResponse } from './types';
 
-const incorrect_login_or_password = 'incorrect_login_or_password'
-
-export interface IUserRequest {
-  username: string
-  password: string
-}
-
-interface IResponseErrorLogOrPwd {
-  errorText: typeof incorrect_login_or_password
-  status: 500 | 404
-}
-
-export type IResponseError = IResponseErrorLogOrPwd
-
-export interface IAuthResponse {
-  status: number
-  data?: IUser
-  errorText?: IResponseError
-}
 
 const checkCredentials = (data: IUserRequest): boolean => {
   if (
