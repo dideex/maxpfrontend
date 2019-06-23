@@ -7,6 +7,7 @@ export const initialState: UserStore = {
   email: '',
   gender: null,
   loading: 'IDLE',
+  error: null,
 }
 
 export const reducer = (state = initialState, action: ActionTypes): UserStore => {
@@ -23,13 +24,17 @@ export const reducer = (state = initialState, action: ActionTypes): UserStore =>
         age: action.payload.val,
       }
 
+    case 'getUserDataRequest':
+      return { ...initialState, loading: 'LOADING' }
+
     case 'getUserDataSuccess':
-      return { loading: 'LOADED', ...action.payload.user }
+      return { ...action.payload.user, loading: 'LOADED' }
 
     case 'getUserDataFail':
       return {
         ...initialState,
         ...action.payload.err,
+        loading: 'ERROR',
       }
 
     default:

@@ -12,6 +12,7 @@ export const thunkAction = (delay: number): ThunkAction<void, RootStore, void, A
 }
 
 export const authUser = (data: IUserRequest): ThunkAction<void, RootStore, void, AnyAction> => dispatch => {
+  dispatch(actions.getUserDataRequest())
   authenticate(data)
     .then(response => {
       console.log(response)
@@ -21,7 +22,6 @@ export const authUser = (data: IUserRequest): ThunkAction<void, RootStore, void,
     })
     .catch(err => {
       if (err.errorText) {
-        console.log('TCL: err', err)
         dispatch(actions.getUserDataFail(err))
       }
     })
