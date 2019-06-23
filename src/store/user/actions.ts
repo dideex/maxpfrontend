@@ -1,4 +1,3 @@
-import * as constants from '../../constants'
 import { IUser } from './types'
 import { IResponseError } from '../../api'
 

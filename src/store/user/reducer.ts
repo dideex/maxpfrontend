@@ -1,8 +1,4 @@
-import * as actions from './actions'
-import { UserStore } from './types'
-
-type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never
-export type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
+import { UserStore, ActionTypes } from './types'
 
 export const initialState: UserStore = {
   userName: '',
@@ -11,7 +7,6 @@ export const initialState: UserStore = {
   email: '',
   gender: null,
   loading: 'IDLE',
-  error: null,
 }
 
 export const reducer = (state = initialState, action: ActionTypes): UserStore => {
@@ -29,11 +24,12 @@ export const reducer = (state = initialState, action: ActionTypes): UserStore =>
       }
 
     case 'getUserDataSuccess':
-      return action.payload
+      return { loading: 'LOADED', ...action.payload.user }
 
     case 'getUserDataFail':
       return {
-        ...state,
+        ...initialState,
+        ...action.payload.err,
       }
 
     default:

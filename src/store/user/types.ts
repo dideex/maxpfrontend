@@ -1,5 +1,7 @@
 import { TLoading } from '../../types'
 import { IResponseError } from '../../api'
+import * as actions from './actions'
+import { InferValueTypes } from '../types'
 
 export interface IUser {
   userName: string
@@ -18,3 +20,5 @@ export interface INetworkError {
 }
 
 export type UserStore = IUser & INetworkStatus & INetworkError
+
+export type ActionTypes = ReturnType<InferValueTypes<typeof actions>>

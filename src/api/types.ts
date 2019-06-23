@@ -1,4 +1,4 @@
-import { IUser } from '../store/redux/types'
+import { IUser } from '../store/user/types'
 
 export interface IUserRequest {
   username: string
@@ -17,7 +17,7 @@ export type TResponseStatus = TSuccessStatus | TErrorStatus
 export type IResponseError = IResponseErrorLogOrPwd | null
 
 export interface IAuthResponse {
-  status: TErrorStatus
+  status: TResponseStatus
   data?: IUser
   errorText?: IResponseError
 }
