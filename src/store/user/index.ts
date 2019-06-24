@@ -1,10 +1,5 @@
-import { createStore, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-import { createLogger } from 'redux-logger'
 import { UserStore } from './types'
-import { reducer } from './reducer'
 
-export const store = createStore(reducer, applyMiddleware(thunk, createLogger()))
-
+// TODO: Fix a re-exported type without --isolatedModules flag
 export type UserStore = UserStore
 export { reducer, initialState } from './reducer'

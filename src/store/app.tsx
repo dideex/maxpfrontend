@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { CircularProgress } from '@material-ui/core'
 
 import { init, inc } from './user/actions'
 import { unboxThunk, TypeOfConnect } from './types'
@@ -39,10 +40,16 @@ class App extends React.PureComponent<AppProps, AppState> {
     const { user } = this.props
     return (
       <>
-        <div>{user.age}</div>
-        <div>{user.email}</div>
-        <div>{user.gender}</div>
-        <div>{user.loading}</div>
+        {user.loading === 'LOADING' ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <div>{user.age}</div>
+            <div>{user.email}</div>
+            <div>{user.gender}</div>
+            <div>{user.loading}</div>
+          </>
+        )}
         {user.error && <div>{user.error}</div>}
         <input type="text" value={this.state.username} onChange={this._handleChange('username')} />
         <input type="text" value={this.state.password} onChange={this._handleChange('password')} />
