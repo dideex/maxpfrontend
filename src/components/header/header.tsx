@@ -7,6 +7,7 @@ const Header: React.FC = () => (
     <Link to="/login"> Sign in </Link>
     <Link to="/profile"> Profile </Link>
     <Link to="/News"> Our news </Link>
+    <Link to="/Redux"> Test redux </Link>
   </header>
 )
 export default Header

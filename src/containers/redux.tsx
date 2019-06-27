@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { RootStore } from '../store'
 import { init, inc } from '../store/user/actions'
 import { thunkAction, authUser } from '../store/user/saga'
-import { Auth } from '../components/auth'
+import App from '../store/app'
 
 const storeEnhancer = connect(
   (state: RootStore) => ({ ...state }),
@@ -15,7 +15,7 @@ const storeEnhancer = connect(
   },
   null,
   { pure: false },
-)(Auth)
+)(App)
 
 export type AppProps = {} & TypeOfConnect<typeof storeEnhancer>
 
