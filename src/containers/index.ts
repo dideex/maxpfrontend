@@ -1,2 +1,2 @@
-export { default as AuthContainer } from './auth'
+export { authContainer } from './auth'
 export { default as ReduxContainer } from './redux'

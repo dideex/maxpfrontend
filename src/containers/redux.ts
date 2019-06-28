@@ -3,9 +3,8 @@ import { connect } from 'react-redux'
 import { RootStore } from '../store'
 import { init, inc } from '../store/user/actions'
 import { thunkAction, authUser } from '../store/user/saga'
-import App from '../store/app'
 
-const storeEnhancer = connect(
+export const reduxStoreEnhancer = connect(
   (state: RootStore) => ({ ...state }),
   {
     init,
@@ -15,8 +14,8 @@ const storeEnhancer = connect(
   },
   null,
   { pure: false },
-)(App)
+)
 
-export type AppProps = {} & TypeOfConnect<typeof storeEnhancer>
+export type ReduxProps = {} & TypeOfConnect<typeof reduxStoreEnhancer>
 
-export default storeEnhancer
+export default reduxStoreEnhancer

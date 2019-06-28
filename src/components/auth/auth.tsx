@@ -5,8 +5,10 @@ import Paper from '@material-ui/core/Paper'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Theme, createStyles } from '@material-ui/core'
 
-import AuthHeader from "./auth-header";
+import AuthHeader from './auth-header'
 import { CustomInput } from '../common'
+import { authContainer } from '../../containers'
+import { authStoreProps } from '../../containers/auth'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -18,28 +20,27 @@ const styles = (theme: Theme) =>
       [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
         width: 400,
         marginLeft: 'auto',
-        marginRight: 'auto'
-      }
+        marginRight: 'auto',
+      },
     },
     paper: {
       marginTop: theme.spacing.unit * 8,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
-        .spacing.unit * 3}px`
+      padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
     },
     avatar: {
       margin: theme.spacing.unit,
-      backgroundColor: theme.palette.secondary.main
+      backgroundColor: theme.palette.secondary.main,
     },
     form: {
       width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing.unit
+      marginTop: theme.spacing.unit,
     },
     submit: {
-      marginTop: theme.spacing.unit * 3
-    }
+      marginTop: theme.spacing.unit * 3,
+    },
   })
 
 interface ISignInTheme {
@@ -50,7 +51,7 @@ interface ISignInTheme {
   submit: string
 }
 
-interface ISignIn {
+interface ISignInStyles {
   classes: ISignInTheme
 }
 
@@ -58,8 +59,11 @@ interface IForm {
   [key: string]: string
 }
 
-const SignIn: React.FC<ISignIn> = ({ classes }) => {
+type IAuthProps = authStoreProps & ISignInStyles
+
+const SignIn: React.FC<IAuthProps> = ({ classes, user }) => {
   const { main, paper, avatar, form, submit } = classes
+  console.log(user)
 
   const [state, setState] = React.useState<IForm>({})
 
@@ -69,31 +73,24 @@ const SignIn: React.FC<ISignIn> = ({ classes }) => {
     return {
       value: state[name],
       handleChange,
-      name
+      name,
     }
   }
 
-
-const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
-  e.preventDefault()
-  console.log(" LOG ___ state ", state )
-}
+  const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log(' LOG ___ state ', state)
+  }
 
   return (
     <main className={main}>
       <CssBaseline />
       <Paper className={paper}>
-        <AuthHeader theme={avatar} title="Sign in"  />
+        <AuthHeader theme={avatar} title="Sign in" />
         <form className={form} onSubmit={handleSubmit}>
           <CustomInput {...getInputProps('username')} type="text" />
           <CustomInput {...getInputProps('password')} type="password" />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={submit}
-          >
+          <Button type="submit" fullWidth variant="contained" color="primary" className={submit}>
             Sign in
           </Button>
         </form>
@@ -102,4 +99,4 @@ const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
   )
 }
 
-export default withStyles(styles)(SignIn)
+export default authContainer(withStyles(styles)(SignIn))

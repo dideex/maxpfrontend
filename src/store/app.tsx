@@ -1,28 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { CircularProgress } from '@material-ui/core'
+import reduxStoreEnhancer from '../containers/redux'
 
-import { init, inc } from './user/actions'
-import { unboxThunk, TypeOfConnect } from './types'
-import { thunkAction, authUser } from './user/saga'
-import { RootStore } from '.'
+import { ReduxProps } from '../containers/redux'
 
-const storeEnhancer = connect(
-  (state: RootStore) => ({ ...state }),
-  {
-    init,
-    inc,
-    thunkAction: unboxThunk(thunkAction),
-    authUser: unboxThunk(authUser),
-  },
-  null,
-  { pure: false },
-)
-
-type AppProps = {} & TypeOfConnect<typeof storeEnhancer>
 type AppState = { username: string; password: string }
 
-class App extends React.PureComponent<AppProps, AppState> {
+class App extends React.PureComponent<ReduxProps, AppState> {
   state = {
     username: '',
     password: '',
@@ -59,4 +43,4 @@ class App extends React.PureComponent<AppProps, AppState> {
   }
 }
 
-export default storeEnhancer(App)
+export default reduxStoreEnhancer(App)
