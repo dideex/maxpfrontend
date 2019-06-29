@@ -11,7 +11,6 @@ export const inc = (val: number) =>
     payload: { val },
   } as const)
 
-
 export const getUserDataRequest = () => ({ type: 'getUserDataRequest' } as const)
 
 export const getUserDataSuccess = (user: IUser) =>

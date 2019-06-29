@@ -9,6 +9,8 @@ import AuthHeader from './auth-header'
 import { CustomInput } from '../common'
 import { authContainer } from '../../containers'
 import { authStoreProps } from '../../containers/auth'
+import { IUser } from '../../store/user/types'
+import { IUserRequest } from '../../api'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -61,13 +63,11 @@ interface IForm {
 
 type IAuthProps = authStoreProps & ISignInStyles
 
-const SignIn: React.FC<IAuthProps> = ({ classes, user }) => {
+const SignIn: React.FC<IAuthProps> = ({ classes, authUser }) => {
   const { main, paper, avatar, form, submit } = classes
-  console.log(user)
+  const [state, setState] = React.useState<IUserRequest>({ username: 'admin', password: '12345' })
 
-  const [state, setState] = React.useState<IForm>({})
-
-  const getInputProps = (name: string) => {
+  const getInputProps = (name: keyof IUserRequest) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
       setState({ ...state, [name]: event.target.value })
     return {
@@ -79,7 +79,7 @@ const SignIn: React.FC<IAuthProps> = ({ classes, user }) => {
 
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(' LOG ___ state ', state)
+    authUser(state)
   }
 
   return (

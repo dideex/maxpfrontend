@@ -15,7 +15,7 @@ export const authUser = (data: IUserRequest): ThunkAction<void, RootStore, void,
   dispatch(actions.getUserDataRequest())
   authenticate(data)
     .then(response => {
-      console.log(response)
+      console.log('authUser -> response', response)
       if (response.data) {
         dispatch(actions.getUserDataSuccess(response.data))
       }

@@ -1,17 +1,11 @@
 import { unboxThunk, TypeOfConnect } from '../store/types'
 import { connect } from 'react-redux'
 import { RootStore } from '../store'
-import { init, inc } from '../store/user/actions'
-import { thunkAction, authUser } from '../store/user/saga'
+import { authUser } from '../store/user/saga'
 
 export const authContainer = connect(
   (state: RootStore) => ({ ...state }),
-  {
-    init,
-    inc,
-    thunkAction: unboxThunk(thunkAction),
-    authUser: unboxThunk(authUser),
-  },
+  { authUser: unboxThunk(authUser) },
   null,
   { pure: false },
 )
