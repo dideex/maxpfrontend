@@ -3,13 +3,12 @@ import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Paper from '@material-ui/core/Paper'
 import withStyles from '@material-ui/core/styles/withStyles'
-import { Theme, createStyles } from '@material-ui/core'
+import { Theme, createStyles, CircularProgress } from '@material-ui/core'
 
 import AuthHeader from './auth-header'
 import { CustomInput } from '../common'
 import { authContainer } from '../../containers'
 import { authStoreProps } from '../../containers/auth'
-import { IUser } from '../../store/user/types'
 import { IUserRequest } from '../../api'
 
 const styles = (theme: Theme) =>
@@ -57,13 +56,10 @@ interface ISignInStyles {
   classes: ISignInTheme
 }
 
-interface IForm {
-  [key: string]: string
-}
-
 type IAuthProps = authStoreProps & ISignInStyles
 
-const SignIn: React.FC<IAuthProps> = ({ classes, authUser }) => {
+const SignIn: React.FC<IAuthProps> = ({ classes, authUser, user }) => {
+  const loading = user.loading === 'LOADING'
   const { main, paper, avatar, form, submit } = classes
   const [state, setState] = React.useState<IUserRequest>({ username: 'admin', password: '12345' })
 
@@ -92,6 +88,7 @@ const SignIn: React.FC<IAuthProps> = ({ classes, authUser }) => {
           <CustomInput {...getInputProps('password')} type="password" />
           <Button type="submit" fullWidth variant="contained" color="primary" className={submit}>
             Sign in
+            {loading && <CircularProgress size={24} />}
           </Button>
         </form>
       </Paper>
