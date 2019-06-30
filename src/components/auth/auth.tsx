@@ -56,7 +56,7 @@ interface ISignInStyles {
   classes: ISignInTheme
 }
 
-type IAuthProps = authStoreProps & ISignInStyles
+export type IAuthProps = authStoreProps & ISignInStyles
 
 const SignIn: React.FC<IAuthProps> = ({ classes, authUser, user }) => {
   const loading = user.loading === 'LOADING'
@@ -96,4 +96,5 @@ const SignIn: React.FC<IAuthProps> = ({ classes, authUser, user }) => {
   )
 }
 
-export default authContainer(withStyles(styles)(SignIn))
+export const AuthStyled = withStyles(styles)(SignIn)
+export default authContainer(AuthStyled)
