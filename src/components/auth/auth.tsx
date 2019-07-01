@@ -40,7 +40,12 @@ const styles = (theme: Theme) =>
       marginTop: theme.spacing.unit,
     },
     submit: {
+      position: 'relative',
       marginTop: theme.spacing.unit * 3,
+    },
+    spinner: {
+      position: 'absolute',
+      right: theme.spacing.unit * 3,
     },
   })
 
@@ -50,6 +55,7 @@ interface ISignInTheme {
   avatar: string
   form: string
   submit: string
+  spinner: string
 }
 
 interface ISignInStyles {
@@ -61,7 +67,7 @@ export type IAuthProps = authStoreProps & ISignInStyles
 const SignIn: React.FC<IAuthProps> = ({ classes, authUser, user }) => {
   const loading = user.loading === 'LOADING'
   const { main, paper, avatar, form, submit } = classes
-  const [state, setState] = React.useState<IUserRequest>({ username: 'admin', password: '12345' })
+  const [state, setState] = React.useState<IUserRequest>({ username: '', password: '' })
 
   const getInputProps = (name: keyof IUserRequest) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -88,7 +94,7 @@ const SignIn: React.FC<IAuthProps> = ({ classes, authUser, user }) => {
           <CustomInput {...getInputProps('password')} type="password" />
           <Button type="submit" fullWidth variant="contained" color="primary" className={submit}>
             Sign in
-            {loading && <CircularProgress size={24} />}
+            {loading && <CircularProgress color="secondary" size={24} className={classes.spinner} />}
           </Button>
         </form>
       </Paper>

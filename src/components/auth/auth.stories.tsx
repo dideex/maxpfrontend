@@ -3,6 +3,9 @@ import { storiesOf } from '@storybook/react'
 // import { action } from '@storybook/addon-actions';
 import { AuthStyled } from './auth'
 import { authStoreProps } from '../../containers/auth'
+import { action } from '@storybook/addon-actions'
+
+const authUser = action('Handle submit')
 
 const authStore: authStoreProps = {
   user: {
@@ -13,9 +16,15 @@ const authStore: authStoreProps = {
     email: '',
     gender: 'man',
   },
-  authUser: () => {},
+  authUser,
 }
 
-storiesOf('Auth', module).add('Auth component', () => <AuthStyled {...authStore} />, {
-  info: { inline: true },
-})
+storiesOf('Auth', module)
+  .add('Basic view', () => <AuthStyled {...authStore} />, { info: { inline: true } })
+  .add(
+    'Loading',
+    () => <AuthStyled user={{ ...authStore.user, loading: 'LOADING' }} authUser={authStore.authUser} />,
+    {
+      info: { inline: true },
+    },
+  )
