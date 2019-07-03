@@ -13,7 +13,7 @@ const withStyles = createStyles((theme: Theme) =>
       flexGrow: 1,
     },
     menuButton: {
-      marginRight: theme.spacing.unit * 2,
+      marginRight: theme.spacing(2),
     },
     title: {
       flexGrow: 1,
@@ -36,9 +36,9 @@ export const ButtonAppBar: React.FC<IAppBarClasses> = ({ classes }) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
+          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography variant="h6" className={classes.title}>
             News
           </Typography>
@@ -49,4 +49,4 @@ export const ButtonAppBar: React.FC<IAppBarClasses> = ({ classes }) => {
   )
 }
 
-export default withStyles(ButtonAppBar)
+// export default withStyles(ButtonAppBar)

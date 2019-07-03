@@ -1,9 +1,7 @@
 import * as React from 'react'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Paper from '@material-ui/core/Paper'
-import withStyles from '@material-ui/core/styles/withStyles'
-import { Theme, createStyles, CircularProgress } from '@material-ui/core'
+import { Theme, CircularProgress, makeStyles, Container } from '@material-ui/core'
 
 import AuthHeader from './auth-header'
 import { CustomInput } from '../common'
@@ -11,62 +9,42 @@ import { authContainer } from '../../containers'
 import { authStoreProps } from '../../containers/auth'
 import { IUserRequest } from '../../api'
 
-const styles = (theme: Theme) =>
-  createStyles({
-    main: {
-      width: 'auto',
-      display: 'block', // Fix IE 11 issue.
-      marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3,
-      [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-        width: 400,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-      },
+const useStyles = makeStyles((theme: Theme) => ({
+  '@global': {
+    body: {
+      backgroundColor: theme.palette.common.white,
     },
-    paper: {
-      marginTop: theme.spacing.unit * 8,
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-    },
-    avatar: {
-      margin: theme.spacing.unit,
-      backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-      width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing.unit,
-    },
-    submit: {
-      position: 'relative',
-      marginTop: theme.spacing.unit * 3,
-    },
-    spinner: {
-      position: 'absolute',
-      right: theme.spacing.unit * 3,
-    },
-  })
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    position: 'relative',
+    margin: theme.spacing(3, 0, 2),
+  },
+  spinner: {
+    position: 'absolute',
+    right: theme.spacing(3),
+  },
+}))
 
-interface ISignInTheme {
-  main: string
-  paper: string
-  avatar: string
-  form: string
-  submit: string
-  spinner: string
-}
+export type IAuthProps = authStoreProps
 
-interface ISignInStyles {
-  classes: ISignInTheme
-}
-
-export type IAuthProps = authStoreProps & ISignInStyles
-
-const SignIn: React.FC<IAuthProps> = ({ classes, authUser, user }) => {
+export const SignIn: React.FC<IAuthProps> = ({ authUser, user }) => {
   const loading = user.loading === 'LOADING'
-  const { main, paper, avatar, form, submit } = classes
+  const classes = useStyles()
+  const { paper, avatar, form, submit } = classes
   const [state, setState] = React.useState<IUserRequest>({ username: '', password: '' })
 
   const getInputProps = (name: keyof IUserRequest) => {
@@ -85,9 +63,9 @@ const SignIn: React.FC<IAuthProps> = ({ classes, authUser, user }) => {
   }
 
   return (
-    <main className={main}>
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <Paper className={paper}>
+      <div className={paper}>
         <AuthHeader theme={avatar} title="Sign in" />
         <form className={form} onSubmit={handleSubmit}>
           <CustomInput {...getInputProps('username')} type="text" />
@@ -97,10 +75,9 @@ const SignIn: React.FC<IAuthProps> = ({ classes, authUser, user }) => {
             {loading && <CircularProgress color="secondary" size={24} className={classes.spinner} />}
           </Button>
         </form>
-      </Paper>
-    </main>
+      </div>
+    </Container>
   )
 }
 
-export const AuthStyled = withStyles(styles)(SignIn)
-export default authContainer(AuthStyled)
+export default authContainer(SignIn)

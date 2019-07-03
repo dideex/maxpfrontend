@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
 // import { action } from '@storybook/addon-actions';
-import { AuthStyled } from './auth'
+import { SignIn } from './auth'
 import { authStoreProps } from '../../containers/auth'
 import { action } from '@storybook/addon-actions'
 
@@ -20,10 +20,10 @@ const authStore: authStoreProps = {
 }
 
 storiesOf('Auth', module)
-  .add('Basic view', () => <AuthStyled {...authStore} />, { info: { inline: true } })
+  .add('Basic view', () => <SignIn {...authStore} />, { info: { inline: true } })
   .add(
     'Loading',
-    () => <AuthStyled user={{ ...authStore.user, loading: 'LOADING' }} authUser={authStore.authUser} />,
+    () => <SignIn user={{ ...authStore.user, loading: 'LOADING' }} authUser={authStore.authUser} />,
     {
       info: { inline: true },
     },
