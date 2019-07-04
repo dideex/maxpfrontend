@@ -1,0 +1,1 @@
+export type TTitles = 'News' | 'Sign in' | 'Profile'
