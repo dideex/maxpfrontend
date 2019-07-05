@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
+import { THeaderTitles } from '../../routes'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -20,11 +21,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 interface IHeaderAppBar {
-  title: String
+  title: THeaderTitles
 }
 
-
-export const HeaderAppBar: React.FC<IHeaderAppBar> = () => {
+export const HeaderAppBar: React.FC<IHeaderAppBar> = ({ title }) => {
   const classes = useStyles()
   return (
     <div className={classes.root}>
@@ -34,7 +34,7 @@ export const HeaderAppBar: React.FC<IHeaderAppBar> = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            News
+            {title}
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
