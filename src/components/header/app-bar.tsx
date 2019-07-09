@@ -3,18 +3,11 @@ import { Theme, makeStyles, createStyles, fade } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import {
-  Mail as MailIcon,
-  Menu as MenuIcon,
-  AccountCircle,
-  Notifications,
-  Search,
-  More,
-  WebAsset,
-} from '@material-ui/icons'
+import { AccountCircle, Search, More, WebAsset } from '@material-ui/icons'
 import { MenuItem, Menu, IconButton, Badge, InputBase } from '@material-ui/core'
 
 import { THeaderTitles } from '../../routes'
+import { MobileMenu } from './app-bar-components/mobile-menu'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -85,7 +78,6 @@ interface IHeaderAppBar {
 }
 
 export const HeaderAppBar: React.FC<IHeaderAppBar> = ({ title }) => {
-  // const classes = useStyles()
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -127,45 +119,13 @@ export const HeaderAppBar: React.FC<IHeaderAppBar> = ({ title }) => {
   )
 
   const mobileMenuId = 'primary-search-account-menu-mobile'
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton aria-label="Show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="Show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <Notifications />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="Account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  )
+  const mobileProps = {
+    handleProfileMenuOpen,
+    mobileMoreAnchorEl,
+    mobileMenuId,
+    isMobileMenuOpen,
+    handleMobileMenuClose,
+  }
 
   return (
     <div className={classes.grow}>
@@ -218,7 +178,7 @@ export const HeaderAppBar: React.FC<IHeaderAppBar> = ({ title }) => {
           </div>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
+      <MobileMenu {...mobileProps} />
       {renderMenu}
     </div>
   )
