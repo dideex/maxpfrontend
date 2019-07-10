@@ -4,10 +4,11 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { AccountCircle, Search, More, WebAsset } from '@material-ui/icons'
-import { MenuItem, Menu, IconButton, Badge, InputBase } from '@material-ui/core'
+import { IconButton, Badge, InputBase } from '@material-ui/core'
 
 import { THeaderTitles } from '../../routes'
 import { MobileMenu } from './app-bar-components/mobile-menu'
+import { DesktopMenu } from './app-bar-components/desktop-menu';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -103,22 +104,15 @@ export const HeaderAppBar: React.FC<IHeaderAppBar> = ({ title }) => {
   }
 
   const menuId = 'primary-search-account-menu'
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  )
-
   const mobileMenuId = 'primary-search-account-menu-mobile'
+  const desktopProps = {
+    handleProfileMenuOpen,
+    anchorEl,
+    menuId,
+    isMenuOpen,
+    handleMenuClose,
+  }
+
   const mobileProps = {
     handleProfileMenuOpen,
     mobileMoreAnchorEl,
@@ -178,8 +172,8 @@ export const HeaderAppBar: React.FC<IHeaderAppBar> = ({ title }) => {
           </div>
         </Toolbar>
       </AppBar>
+      <DesktopMenu {...desktopProps} />
       <MobileMenu {...mobileProps} />
-      {renderMenu}
     </div>
   )
 }
