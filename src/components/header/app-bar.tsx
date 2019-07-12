@@ -8,7 +8,9 @@ import { IconButton, Badge, InputBase } from '@material-ui/core'
 
 import { THeaderTitles } from '../../routes'
 import { MobileMenu } from './app-bar-components/mobile-menu'
-import { DesktopMenu } from './app-bar-components/desktop-menu';
+import { DesktopMenu } from './app-bar-components/desktop-menu'
+import { isLoggedIn } from '../../containers'
+import { isLoggedInProps } from '../../containers/is-logged-in'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -78,7 +80,9 @@ interface IHeaderAppBar {
   title: THeaderTitles
 }
 
-export const HeaderAppBar: React.FC<IHeaderAppBar> = ({ title }) => {
+type HeaderAppBarProps = IHeaderAppBar & isLoggedInProps
+
+export const HeaderAppBar: React.FC<HeaderAppBarProps> = ({ title, isAuth }) => {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -178,4 +182,4 @@ export const HeaderAppBar: React.FC<IHeaderAppBar> = ({ title }) => {
   )
 }
 
-export default HeaderAppBar
+export default isLoggedIn(HeaderAppBar)

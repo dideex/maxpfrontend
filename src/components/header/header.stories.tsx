@@ -21,10 +21,8 @@ const groupId = 'GROUP-ID1'
 stories.addDecorator(withKnobs)
 
 stories
-  .addParameters({ viewport: { defaultViewport: 'iphone6' } })
-  .add('Knobs header', () => (
+  .addParameters({ viewport: { defaultViewport: 'responsive' } })
+  .add('Desktop basic', () => (
     <HeaderAppBar title={select(label, options, defaultValue, groupId) as THeaderTitles} />
   ))
-  .add('News header', () => <HeaderAppBar title="News" />, { info: { inline: true } })
-  .add('Sign in header', () => <HeaderAppBar title="Sign in" />, { info: { inline: true } })
   .add('IPhone', () => <HeaderAppBar title="Sign in" />, { viewport: { defaultViewport: 'iphonex' } })
