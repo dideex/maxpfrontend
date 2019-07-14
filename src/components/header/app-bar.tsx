@@ -3,7 +3,7 @@ import { Theme, makeStyles, createStyles, fade } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import { AccountCircle, Search, More, WebAsset } from '@material-ui/icons'
+import { AccountCircle, Search, More, WebAsset, Face } from '@material-ui/icons'
 import { IconButton, Badge, InputBase } from '@material-ui/core'
 
 import { THeaderTitles } from '../../routes'
@@ -80,7 +80,7 @@ interface IHeaderAppBar {
   title: THeaderTitles
 }
 
-type HeaderAppBarProps = IHeaderAppBar & isLoggedInProps
+export type HeaderAppBarProps = IHeaderAppBar & isLoggedInProps
 
 export const HeaderAppBar: React.FC<HeaderAppBarProps> = ({ title, isAuth }) => {
   const classes = useStyles()
@@ -110,6 +110,7 @@ export const HeaderAppBar: React.FC<HeaderAppBarProps> = ({ title, isAuth }) => 
   const menuId = 'primary-search-account-menu'
   const mobileMenuId = 'primary-search-account-menu-mobile'
   const desktopProps = {
+    isAuth,
     handleProfileMenuOpen,
     anchorEl,
     menuId,
@@ -160,7 +161,7 @@ export const HeaderAppBar: React.FC<HeaderAppBarProps> = ({ title, isAuth }) => 
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              {isAuth ? <Face /> : <AccountCircle />}
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>

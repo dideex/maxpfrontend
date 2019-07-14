@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
-import HeaderAppBar from './app-bar'
-import { withKnobs, select } from '@storybook/addon-knobs'
+import { HeaderAppBar, HeaderAppBarProps } from './app-bar'
+import { withKnobs, select, boolean } from '@storybook/addon-knobs'
 import { THeaderTitles } from '../../routes'
+import { isLoggedInProps } from '../../containers/is-logged-in'
 // import { action } from '@storybook/addon-actions'
 
 const stories = storiesOf('Header menu', module)
@@ -23,6 +24,11 @@ stories.addDecorator(withKnobs)
 stories
   .addParameters({ viewport: { defaultViewport: 'responsive' } })
   .add('Desktop basic', () => (
-    <HeaderAppBar title={select(label, options, defaultValue, groupId) as THeaderTitles} />
+    <HeaderAppBar
+      title={select(label, options, defaultValue, groupId) as THeaderTitles}
+      isAuth={boolean('Logged in', false, 'GROUP-ID1')}
+    />
   ))
-  .add('IPhone', () => <HeaderAppBar title="Sign in" />, { viewport: { defaultViewport: 'iphonex' } })
+  .add('IPhone', () => <HeaderAppBar title="Sign in" isAuth={false} />, {
+    viewport: { defaultViewport: 'iphonex' },
+  })

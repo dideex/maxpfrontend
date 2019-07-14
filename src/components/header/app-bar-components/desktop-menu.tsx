@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Menu, MenuItem } from '@material-ui/core'
 
 interface IDesktopMenuProps {
+  isAuth: boolean
   handleProfileMenuOpen: (event: React.MouseEvent<HTMLElement>) => void
   anchorEl: null | HTMLElement
   menuId: string
@@ -10,7 +11,7 @@ interface IDesktopMenuProps {
 }
 
 export const DesktopMenu: React.FC<IDesktopMenuProps> = props => {
-  const { anchorEl, menuId, isMenuOpen, handleMenuClose } = props
+  const { anchorEl, menuId, isMenuOpen, handleMenuClose, isAuth } = props
   return (
     <Menu
       anchorEl={anchorEl}
@@ -21,8 +22,17 @@ export const DesktopMenu: React.FC<IDesktopMenuProps> = props => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      {isAuth ? (
+        <>
+          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+          <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+        </>
+      ) : (
+        <>
+          <MenuItem onClick={handleMenuClose}>Signin</MenuItem>
+          <MenuItem onClick={handleMenuClose}>Signup</MenuItem>
+        </>
+      )}
     </Menu>
   )
 }
