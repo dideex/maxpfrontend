@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { Menu, MenuItem } from '@material-ui/core'
 
+import { Link } from '../../common'
+
 interface IDesktopMenuProps {
   isAuth: boolean
   handleProfileMenuOpen: (event: React.MouseEvent<HTMLElement>) => void
@@ -24,13 +26,21 @@ export const DesktopMenu: React.FC<IDesktopMenuProps> = props => {
     >
       {isAuth ? (
         <>
-          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+          <Link to="/profile">
+            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+          </Link>
+          <Link to="/logout">
+            <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+          </Link>
         </>
       ) : (
         <>
-          <MenuItem onClick={handleMenuClose}>Signin</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Signup</MenuItem>
+          <Link to="/login">
+            <MenuItem onClick={handleMenuClose}>Signin</MenuItem>
+          </Link>
+          <Link to="/register">
+            <MenuItem onClick={handleMenuClose}>Signup</MenuItem>
+          </Link>
         </>
       )}
     </Menu>

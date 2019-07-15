@@ -3,8 +3,14 @@ import { storiesOf } from '@storybook/react'
 import { HeaderAppBar, HeaderAppBarProps } from './app-bar'
 import { withKnobs, select, boolean } from '@storybook/addon-knobs'
 import { THeaderTitles } from '../../routes'
-import { isLoggedInProps } from '../../containers/is-logged-in'
+import { BrowserRouter as RouterProvider } from 'react-router-dom'
 // import { action } from '@storybook/addon-actions'
+
+const Header = (props: HeaderAppBarProps) => (
+  <RouterProvider>
+    <HeaderAppBar {...props} />
+  </RouterProvider>
+)
 
 const stories = storiesOf('Header menu', module)
 
@@ -24,11 +30,11 @@ stories.addDecorator(withKnobs)
 stories
   .addParameters({ viewport: { defaultViewport: 'responsive' } })
   .add('Desktop basic', () => (
-    <HeaderAppBar
+    <Header
       title={select(label, options, defaultValue, groupId) as THeaderTitles}
       isAuth={boolean('Logged in', false, 'GROUP-ID1')}
     />
   ))
-  .add('IPhone', () => <HeaderAppBar title="Sign in" isAuth={false} />, {
+  .add('IPhone', () => <Header title="Sign in" isAuth={false} />, {
     viewport: { defaultViewport: 'iphonex' },
   })
