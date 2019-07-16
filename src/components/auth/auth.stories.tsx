@@ -24,7 +24,8 @@ storiesOf('Auth', module)
   .add(
     'Loading',
     () => <SignIn user={{ ...authStore.user, loading: 'LOADING' }} authUser={authStore.authUser} />,
-    {
-      info: { inline: true },
-    },
+    { info: { inline: true } },
   )
+  .add('Mobile layout', () => <SignIn {...authStore} />, {
+    viewport: { defaultViewport: 'iphonex' },
+  })

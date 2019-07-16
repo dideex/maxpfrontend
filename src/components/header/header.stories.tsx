@@ -29,12 +29,16 @@ stories.addDecorator(withKnobs)
 
 stories
   .addParameters({ viewport: { defaultViewport: 'responsive' } })
-  .add('Desktop basic', () => (
+  .add('Basic view', () => (
     <Header
       title={select(label, options, defaultValue, groupId) as THeaderTitles}
       isAuth={boolean('Logged in', false, 'GROUP-ID1')}
+      isLoading={false}
     />
   ))
-  .add('IPhone', () => <Header title="Sign in" isAuth={false} />, {
+  .add('Loading view', () => (
+    <Header title="Sign in" isAuth={boolean('Logged in', false, 'GROUP-ID1')} isLoading />
+  ))
+  .add('Mobile layout', () => <Header title="Sign in" isAuth={false} isLoading={false} />, {
     viewport: { defaultViewport: 'iphonex' },
   })

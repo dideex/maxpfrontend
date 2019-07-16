@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { AccountCircle, Search, More, WebAsset, Face } from '@material-ui/icons'
-import { IconButton, Badge, InputBase } from '@material-ui/core'
+import { IconButton, Badge, InputBase, CircularProgress } from '@material-ui/core'
 
 import { THeaderTitles } from '../../routes'
 import { MobileMenu } from './app-bar-components/mobile-menu'
@@ -82,7 +82,7 @@ interface IHeaderAppBar {
 
 export type HeaderAppBarProps = IHeaderAppBar & isLoggedInProps
 
-export const HeaderAppBar: React.FC<HeaderAppBarProps> = ({ title, isAuth }) => {
+export const HeaderAppBar: React.FC<HeaderAppBarProps> = ({ title, isAuth, isLoading }) => {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -105,6 +105,34 @@ export const HeaderAppBar: React.FC<HeaderAppBarProps> = ({ title, isAuth }) => 
 
   function handleMobileMenuOpen(event: React.MouseEvent<HTMLElement>) {
     setMobileMoreAnchorEl(event.currentTarget)
+  }
+
+  function getLoginButton() {
+    return (
+      <IconButton
+        edge="end"
+        aria-label="Account of current user"
+        aria-controls={menuId}
+        aria-haspopup="true"
+        onClick={handleProfileMenuOpen}
+        color="inherit"
+      >
+        {isAuth ? <Face /> : <AccountCircle />}
+      </IconButton>
+    )
+  }
+  function getLoadingSpiner() {
+    return (
+      <IconButton
+        edge="end"
+        aria-label="Account of current user"
+        aria-controls={menuId}
+        aria-haspopup="true"
+        color="inherit"
+      >
+        <CircularProgress color="secondary" size={24} />
+      </IconButton>
+    )
   }
 
   const menuId = 'primary-search-account-menu'
@@ -153,16 +181,7 @@ export const HeaderAppBar: React.FC<HeaderAppBarProps> = ({ title, isAuth }) => 
                 <WebAsset />
               </Badge>
             </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="Account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              {isAuth ? <Face /> : <AccountCircle />}
-            </IconButton>
+            {isLoading ? getLoadingSpiner() : getLoginButton()}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

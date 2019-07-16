@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Menu, MenuItem } from '@material-ui/core'
+import { Menu, MenuItem, CircularProgress } from '@material-ui/core'
 
 import { Link } from '../../common'
 
