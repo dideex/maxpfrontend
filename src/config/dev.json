@@ -1,3 +1,4 @@
 {
-  "tokenKey": "tstz.authenticated"
+  "tokenKey": "tstz.authenticated",
+  "apiServer": "localhost:5000"
 }

@@ -2,31 +2,33 @@ import * as React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar'
 
+import NewsItem from './news-item'
+import { INews } from '../../types'
+
 const styles = {
   avatar: {
     margin: 10,
     width: 60,
-    height: 60
-  }
+    height: 60,
+  },
 }
 interface INewsTheme {
   avatar: string
 }
 
-interface INews {
+interface INewsProps {
   classes: INewsTheme
+  news: INews[]
 }
 
-const News: React.FC<INews> = ({ classes }) => {
+const News: React.FC<INewsProps> = ({ classes, news }) => {
   const { avatar } = classes
   return (
-    <>
-      <Avatar
-        alt="Remy Sharp"
-        src="https://material-ui.com/static/images/avatar/1.jpg"
-        className={avatar}
-      />
-    </>
+    <div>
+      {[1, 2, 3, 4].map(i => (
+        <NewsItem key={i} />
+      ))}
+    </div>
   )
 }
 
