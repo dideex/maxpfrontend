@@ -1,9 +1,16 @@
 import * as React from 'react'
+import { INews } from '../../types'
 
-interface CompProps {}
-
-const NewsItem: React.FC<CompProps> = props => {
-  return <div> News item</div>
+const NewsItem: React.FC<INews> = ({ author, body, title, date }) => {
+  return (
+    <div>
+      <h2>{title}</h2>
+      <p>{body}</p>
+      <p>
+        <a href="#">{author.userName}</a>
+      </p>
+    </div>
+  )
 }
 
 export default NewsItem
